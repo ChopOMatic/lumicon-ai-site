@@ -1,0 +1,1 @@
+# Lumicon AI — Quick Start\n\nnpm install\nnpm run dev\n
