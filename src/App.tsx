@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function App() {
+  // Set dark mode by default
+  useEffect(() => {
+    document.documentElement.classList.add('dark')
+  }, [])
+
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-background text-gray-100 antialiased">
       <Header />
       <Hero />
       <Verses />
@@ -16,28 +21,50 @@ export default function App() {
 }
 
 function Header() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-100 shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? 'bg-gray-900/80 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
-          <LogoMark className="h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
-          <span className="font-extrabold tracking-tight text-2xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">LUMICON<span className="opacity-90"> AI</span></span>
+          <LogoMark className="h-8 w-auto" />
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">Lumicon</span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#verses" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Verses</a>
-          <a href="#automation" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Automation</a>
-          <a href="#security" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Security</a>
-          <a href="#cases" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Results</a>
-          <a href="#contact" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</a>
+        
+        <nav className="hidden md:flex items-center gap-8">
+          <a href="#verses" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Verses</a>
+          <a href="#automation" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Automation</a>
+          <a href="#security" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Security</a>
+          <a href="#case-studies" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Case Studies</a>
         </nav>
-        <div className="flex items-center gap-3">
+        
+        <div className="flex items-center gap-4">
           <a 
             href="https://calendly.com/redforensic/10-minute-intro-meeting" 
             target="_blank" 
-            rel="noreferrer" 
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            rel="noreferrer"
+            className="hidden md:inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
           >
             Book a Call
+          </a>
+          <a 
+            href="https://calendly.com/redforensic/10-minute-intro-meeting" 
+            target="_blank" 
+            rel="noreferrer"
+            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all"
+          >
+            Get Started
+            <ArrowRight className="ml-2 h-4 w-4" />
           </a>
         </div>
       </div>
@@ -47,34 +74,35 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-blue-100/70 blur-3xl animate-float" />
-        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-indigo-100/60 blur-3xl animate-float animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 blur-3xl opacity-50" />
+    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-5"></div>
       </div>
       
-      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32 grid lg:grid-cols-12 gap-16 items-center">
-        <div className="lg:col-span-7 space-y-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-4 py-1.5 text-sm font-medium text-blue-700 shadow-sm backdrop-blur-sm hover:shadow-md transition-all duration-300">
-            <SparkIcon className="h-4 w-4 text-blue-500 flex-shrink-0" /> 
-            <span className="whitespace-nowrap">New: Conversant Dataverses for SMBs</span>
-            <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse-slow"></span>
-          </div>
-          
-          <div className="space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900">
-              <span className="block">Build your </span>
-              <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  conversant dataverse
-                </span>
-                <span className="absolute -bottom-1 left-0 right-0 h-3 bg-blue-100/60 -z-0 rounded-full"></span>
+      {/* Floating elements */}
+      <div className="absolute -top-40 -right-40 w-[800px] h-[800px] rounded-full bg-blue-500/10 blur-3xl animate-float"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-3xl animate-float animation-delay-2000"></div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
+              <span className="text-sm font-medium text-blue-400">Now available for early access</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+              <span className="block text-white">Build your</span>
+              <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">conversant dataverse</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed">
               Transform your business with AI-powered dataverses that understand your data and automate your workflows—securely and locally deployed.
             </p>
             
@@ -83,53 +111,74 @@ function Hero() {
                 href="https://calendly.com/redforensic/10-minute-intro-meeting" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 flex items-center gap-2 group"
               >
                 <span>Book a Strategy Call</span>
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="#verses" 
-                className="px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 flex items-center gap-2"
+                className="px-6 py-3.5 rounded-lg bg-gray-800/50 border border-gray-700 text-gray-300 font-medium hover:bg-gray-800/80 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
               >
                 Explore Verses
               </a>
             </div>
             
-            <div className="pt-2 flex items-center text-sm text-slate-500">
+            <div className="pt-2 flex items-center text-sm text-gray-500">
               <div className="flex -space-x-2 mr-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-8 w-8 rounded-full bg-white border-2 border-white shadow-sm overflow-hidden">
-                    <div className="h-full w-full bg-gradient-to-br from-blue-100 to-indigo-100"></div>
+                  <div key={i} className="h-8 w-8 rounded-full border-2 border-gray-800 overflow-hidden">
+                    <div className="h-full w-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20"></div>
                   </div>
                 ))}
               </div>
               <span>Trusted by innovative teams worldwide</span>
             </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
-            <Pill>Local / VPC</Pill>
-            <Pill>Encryption in transit & at rest</Pill>
-            <Pill>RBAC & SSO</Pill>
-            <Pill>Human-in-the-loop</Pill>
-          </div>
-        </div>
-        
-        <div className="lg:col-span-5">
-          <div className="rounded-3xl border border-slate-200 shadow-sm p-6 bg-white">
-            <div className="flex items-center gap-3">
-              <LogoMark className="h-10 w-10" />
-              <div>
-                <div className="font-bold">Dataverse Preview</div>
-                <div className="text-xs text-slate-500">Ask your business anything</div>
+            
+            <div className="flex flex-wrap gap-3 pt-4">
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                Local / VPC
+              </div>
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                End-to-end encryption
+              </div>
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                RBAC & SSO
               </div>
             </div>
-            <div className="mt-6 space-y-3 text-sm">
-              <SampleQA q="Show me similar matters to Smith v. Metro and draft a pleading." a="Found 12 similar actions. Drafted a pleading using strongest arguments from prior wins." />
-              <SampleQA q="List clients with upcoming renewals where NPS < 7." a="7 clients due next 30 days with NPS < 7. Prepared outreach sequence." />
-              <SampleQA q="Summarize last quarter's revenue drivers." a="Top drivers: referrals (+22%), tax planning upsells (+11%)." />
+          </div>
+          
+          <div className="relative">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 border border-gray-700/50 shadow-2xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                <div className="flex-1 text-center text-sm font-medium text-gray-400">terminal</div>
+              </div>
+              
+              <div className="font-mono text-sm text-gray-300 space-y-4">
+                <div className="flex">
+                  <span className="text-blue-400">$</span>
+                  <span className="ml-2">lumicon init --verse legal</span>
+                </div>
+                <div className="text-green-400">✓ Initialized LegalVerse workspace</div>
+                <div className="text-green-400">✓ Connected to secure VPC</div>
+                <div className="text-green-400">✓ Authenticated with SSO</div>
+                <div className="pt-2">
+                  <div className="flex">
+                  <span className="text-blue-400">$</span>
+                  <span className="ml-2 text-gray-400">lumicon query "Show pending cases with high priority"</span>
+                </div>
+                </div>
+                <div className="text-green-400">✓ Found 3 high-priority cases</div>
+                <div className="pl-4 text-gray-400">• Smith v. Metro (Due: 2d) - Discovery</div>
+                <div className="pl-4 text-gray-400">• Johnson LLC (Due: 3d) - Contract Review</div>
+                <div className="pl-4 text-gray-400">• Acme Corp (Due: 5d) - Compliance</div>
+              </div>
             </div>
+            
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 -z-10 blur-xl"></div>
           </div>
         </div>
       </div>
@@ -139,16 +188,122 @@ function Hero() {
 
 function Verses() {
   return (
-    <section id="verses" className="mx-auto max-w-7xl px-6 py-16">
-      <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Productized Dataverses (“Verses”)</h2>
-      <p className="mt-2 text-slate-600 max-w-3xl">Industry-tuned knowledge + retrieval so teams can converse with their entire universe of data—securely, locally, and fast.</p>
-      <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <VerseCard title="LegalVerse" tagline="For law firms" points={["Conversational access to prior cases & pleadings","Rapid first drafts & argument extraction","Local/VPC deployment with audit trails"]} />
-        <VerseCard title="WealthVerse" tagline="For financial services" points={["Query client history & performance","Surface what worked (and didn’t)","Assist prep for reviews & outreach"]} />
-        <VerseCard title="TaxVerse" tagline="For accounting firms" points={["Search filings, workpapers, memos","Auto-summarize changes & deadlines","Draft client-ready explanations"]} />
-        <VerseCard title="SupportVerse" tagline="For customer support" points={["Instant answers from KB, tickets, chats","Auto-tag & route complex cases","QA & insights on deflection"]} />
-        <VerseCard title="OpsVerse" tagline="For operations teams" points={["SOP search & action triggering","Scheduling, approvals, CRM sync","KPIs with real-time alerts"]} />
-        <VerseCard title="SalesVerse" tagline="For GTM teams" points={["Personalized sequences from notes & CRM","Competitive insights on demand","Auto-assemble collateral"]} />
+    <section id="verses" className="relative py-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-0 left-0 w-full h-full -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+            Productized <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Dataverses</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Industry-tuned knowledge + retrieval so teams can converse with their entire universe of data—securely, locally, and fast.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              title: "LegalVerse",
+              tagline: "For law firms",
+              points: [
+                "Conversational access to prior cases & pleadings",
+                "Rapid first drafts & argument extraction",
+                "Local/VPC deployment with audit trails"
+              ],
+              gradient: "from-blue-500/10 to-blue-600/10"
+            },
+            {
+              title: "WealthVerse",
+              tagline: "For financial services",
+              points: [
+                "Query client history & performance",
+                "Surface what worked (and didn't)",
+                "Assist prep for reviews & outreach"
+              ],
+              gradient: "from-emerald-500/10 to-emerald-600/10"
+            },
+            {
+              title: "TaxVerse",
+              tagline: "For accounting firms",
+              points: [
+                "Search filings, workpapers, memos",
+                "Auto-summarize changes & deadlines",
+                "Draft client-ready explanations"
+              ],
+              gradient: "from-purple-500/10 to-purple-600/10"
+            },
+            {
+              title: "SupportVerse",
+              tagline: "For customer support",
+              points: [
+                "Instant answers from KB, tickets, chats",
+                "Auto-tag & route complex cases",
+                "QA & insights on deflection"
+              ],
+              gradient: "from-amber-500/10 to-amber-600/10"
+            },
+            {
+              title: "OpsVerse",
+              tagline: "For operations teams",
+              points: [
+                "SOP search & action triggering",
+                "Scheduling, approvals, CRM sync",
+                "KPIs with real-time alerts"
+              ],
+              gradient: "from-rose-500/10 to-rose-600/10"
+            },
+            {
+              title: "SalesVerse",
+              tagline: "For GTM teams",
+              points: [
+                "Personalized sequences from notes & CRM",
+                "Competitive insights on demand",
+                "Auto-assemble collateral"
+              ],
+              gradient: "from-indigo-500/10 to-indigo-600/10"
+            }
+          ].map((verse, index) => (
+            <div 
+              key={index}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-0.5 backdrop-blur-sm`}
+            >
+              <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-white">{verse.title}</h3>
+                  <div className="inline-flex items-center rounded-full bg-gray-800 px-3 py-1 text-xs font-medium text-gray-300">
+                    {verse.tagline}
+                  </div>
+                </div>
+                <ul className="space-y-3">
+                  {verse.points.map((point, i) => (
+                    <li key={i} className="flex items-start">
+                      <svg className="h-5 w-5 flex-shrink-0 text-blue-400 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-gray-400">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <a 
+                    href="#contact" 
+                    className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group-hover:translate-x-1 duration-300"
+                  >
+                    Learn more
+                    <svg className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -156,14 +311,94 @@ function Verses() {
 
 function Automation() {
   return (
-    <section id="automation" className="bg-slate-50 border-y border-slate-200">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Automate the Busywork — Keep Humans in Control</h2>
-        <p className="mt-2 text-slate-600 max-w-3xl">Agentic workflows that plan multi-step tasks, call tools (calendar, CRM, docs), and request human approval at decision points.</p>
-        <div className="mt-8 grid md:grid-cols-3 gap-6">
-          <Feature icon={<ZapIcon className="h-6 w-6" />} title="Intake & Triage" desc="Capture, enrich, and route leads or matters. Escalate with full context." />
-          <Feature icon={<CompassIcon className="h-6 w-6" />} title="Document Intelligence" desc="Summarize, compare versions, extract entities, and draft next steps." />
-          <Feature icon={<ShieldIcon className="h-6 w-6" />} title="Approvals & Audits" desc="Human sign-off checkpoints and immutable logs for every action." />
+    <section id="automation" className="relative py-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/5 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+            Automate the Busywork — <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Keep Humans in Control</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Agentic workflows that plan multi-step tasks, call tools (calendar, CRM, docs), and request human approval at decision points.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: <ZapIcon className="h-6 w-6 text-blue-400" />,
+              title: "Intake & Triage",
+              desc: "Capture, enrich, and route leads or matters. Escalate with full context.",
+              gradient: "from-blue-500/10 to-blue-600/10"
+            },
+            {
+              icon: <CompassIcon className="h-6 w-6 text-emerald-400" />,
+              title: "Document Intelligence",
+              desc: "Summarize, compare versions, extract entities, and draft next steps.",
+              gradient: "from-emerald-500/10 to-emerald-600/10"
+            },
+            {
+              icon: <ShieldIcon className="h-6 w-6 text-purple-400" />,
+              title: "Approvals & Audits",
+              desc: "Human sign-off checkpoints and immutable logs for every action.",
+              gradient: "from-purple-500/10 to-purple-600/10"
+            }
+          ].map((feature, index) => (
+            <div 
+              key={index}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${feature.gradient} p-0.5 backdrop-blur-sm`}
+            >
+              <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-gray-800/50 text-blue-400">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
+                    <p className="mt-1 text-gray-400">{feature.desc}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono text-gray-500">WORKFLOW EXAMPLE</span>
+                    <a 
+                      href="#contact" 
+                      className="inline-flex items-center text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors group-hover:translate-x-1 duration-300"
+                    >
+                      View
+                      <svg className="ml-1 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                  
+                  <div className="mt-2 bg-gray-800/50 rounded-lg p-3 text-xs text-gray-400 font-mono border border-gray-700/50">
+                    <div>on: new_lead</div>
+                    <div>steps: [enrich, route]</div>
+                    <div>requires_approval: true</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mt-16 text-center">
+          <a 
+            href="#contact" 
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all group"
+          >
+            Explore Workflow Builder
+            <svg className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -172,22 +407,77 @@ function Automation() {
 
 function Security() {
   return (
-    <section id="security" className="mx-auto max-w-7xl px-6 py-16">
-      <div className="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Local, Private, and Secure by Design</h2>
-          <p className="mt-3 text-slate-600">Deploy in your VPC or on-prem. Bring-your-own keys. Observe everything with audit trails, role-based access, and policy guardrails.</p>
-          <ul className="mt-6 space-y-3 text-sm text-slate-700">
-            <li className="flex items-start gap-2"><CheckIcon className="h-5 w-5 mt-0.5 text-slate-600"/> Encryption in transit & at rest</li>
-            <li className="flex items-start gap-2"><CheckIcon className="h-5 w-5 mt-0.5 text-slate-600"/> RBAC, SSO (Okta/Azure AD/Google), least privilege</li>
-            <li className="flex items-start gap-2"><CheckIcon className="h-5 w-5 mt-0.5 text-slate-600"/> PII redaction & policy-based data retention</li>
-            <li className="flex items-start gap-2"><CheckIcon className="h-5 w-5 mt-0.5 text-slate-600"/> Content filters & human-in-the-loop approvals</li>
-            <li className="flex items-start gap-2"><CheckIcon className="h-5 w-5 mt-0.5 text-slate-600"/> Full action & prompt/response auditability</li>
-          </ul>
-        </div>
-        <div className="rounded-3xl border border-slate-200 p-6 bg-white">
-          <div className="font-semibold">Reference Architecture</div>
-          <ArchDiagram />
+    <section id="security" className="relative py-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/5 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-2">
+              <ShieldIcon className="h-4 w-4" />
+              Enterprise-Grade Security
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+              Local, Private, and <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Secure by Design</span>
+            </h2>
+            
+            <p className="text-lg text-gray-400">
+              Deploy in your VPC or on-prem. Bring-your-own keys. Observe everything with audit trails, role-based access, and policy guardrails.
+            </p>
+            
+            <ul className="space-y-3 text-gray-300">
+              {[
+                "Encryption in transit & at rest",
+                "RBAC, SSO (Okta/Azure AD/Google), least privilege",
+                "PII redaction & policy-based data retention",
+                "Content filters & human-in-the-loop approvals",
+                "Full action & prompt/response auditability"
+              ].map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <CheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5 text-emerald-400" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <div className="pt-4">
+              <a 
+                href="#contact" 
+                className="inline-flex items-center text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors group"
+              >
+                Request Security Whitepaper
+                <svg className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 border border-gray-700/50 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 rounded-full bg-emerald-500/10 blur-3xl"></div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 text-sm font-medium text-emerald-400 mb-6">
+                  <ShieldIcon className="h-4 w-4" />
+                  Reference Architecture
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="relative p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
+                    <div className="absolute -top-2 left-4 px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-xs font-mono rounded-full border border-emerald-500/20">
+                      Your VPC
+                    </div>
+                    <ArchDiagram />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -196,13 +486,110 @@ function Security() {
 
 function CaseStudies() {
   return (
-    <section id="cases" className="bg-white border-y border-slate-200">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Results You Can Measure</h2>
-        <div className="mt-8 grid md:grid-cols-3 gap-6">
-          <ResultCard metric="6×" label="Faster doc review" note="Summarization + retrieval from prior matters" />
-          <ResultCard metric="40%" label="Ops time saved" note="Email triage, scheduling, CRM sync" />
-          <ResultCard metric="+22%" label="Referral revenue" note="Proactive client insights & outreach" />
+    <section id="cases" className="relative py-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-900/30 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">
+            <SparkIcon className="h-4 w-4" />
+            Success Stories
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+            Trusted by <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Innovative Teams</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            See how organizations are transforming their operations with Lumicon AI.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            {
+              logo: "AM",
+              company: "AmLaw 100 Firm",
+              industry: "Legal Services",
+              quote: "Lumicon cut our contract review time by 85% while improving accuracy. The AI surfaces critical issues we used to miss.",
+              results: [
+                { metric: "85%", label: "Faster", note: "contract review" },
+                { metric: "3.2x", label: "More", note: "issues caught" },
+                { metric: "$2.4M", label: "Saved", note: "annualized" }
+              ],
+              gradient: "from-blue-500/10 to-blue-600/10"
+            },
+            {
+              logo: "FT",
+              company: "Fortune 500",
+              industry: "Financial Services",
+              quote: "The knowledge base search has transformed how our advisors find client information. What used to take 20+ minutes now takes seconds.",
+              results: [
+                { metric: "92%", label: "Faster", note: "retrieval" },
+                { metric: "40%", label: "Higher", note: "productivity" },
+                { metric: "4.9/5", label: "User", note: "satisfaction" }
+              ],
+              gradient: "from-purple-500/10 to-purple-600/10"
+            }
+          ].map((caseStudy, index) => (
+            <div 
+              key={index}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${caseStudy.gradient} p-0.5 backdrop-blur-sm`}
+            >
+              <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-2xl font-bold text-white">
+                    {caseStudy.logo}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{caseStudy.company}</h3>
+                    <p className="text-sm text-gray-400">{caseStudy.industry}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-6 relative">
+                  <svg 
+                    className="absolute -top-4 -left-1 h-8 w-8 text-purple-500/20" 
+                    fill="currentColor" 
+                    viewBox="0 0 32 32"
+                    aria-hidden="true"
+                  >
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.224 6.624 8.224 3.36 0 5.856-2.624 5.856-5.856 0-3.232-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.168-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.224 6.624 8.224 3.264 0 5.856-2.624 5.856-5.856 0-3.264-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 2.88-7.104 6.528-9.024L25.864 4z" />
+                  </svg>
+                  <p className="relative z-10 text-gray-300 pl-8">{caseStudy.quote}</p>
+                </div>
+                
+                <div className="mt-6 pt-6 border-t border-gray-800">
+                  <div className="text-xs font-medium text-gray-500 mb-3">KEY RESULTS</div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {caseStudy.results.map((result, i) => (
+                      <div key={i} className="bg-gray-800/50 rounded-lg p-3 border border-gray-700/50">
+                        <div className="text-xl font-bold text-white">{result.metric}</div>
+                        <div className="text-xs text-gray-400">
+                          <span className="text-blue-400">{result.label}</span> {result.note}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <p className="text-gray-500 mb-6">
+            Want to see results like these? We'd love to discuss your use case.
+          </p>
+          <a 
+            href="#contact" 
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all group"
+          >
+            Schedule a Demo
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
         </div>
       </div>
     </section>
@@ -211,14 +598,58 @@ function CaseStudies() {
 
 function CTA() {
   return (
-    <section id="contact" className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-amber-500 to-orange-600" />
-      <div className="mx-auto max-w-7xl px-6 py-16 text-white">
-        <h2 className="text-3xl font-extrabold tracking-tight">Ready to build your Verse?</h2>
-        <p className="mt-2 text-amber-100 max-w-2xl">In a 30‑minute call, we’ll map 2–3 high‑ROI automations and a secure dataverse plan tailored to your stack.</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a href="https://calendly.com/redforensic/10-minute-intro-meeting" target="_blank" rel="noreferrer" className="px-5 py-3 rounded-2xl bg-white text-slate-900 font-semibold hover:bg-amber-50">Book a Call</a>
-          <a href="#verses" className="px-5 py-3 rounded-2xl border border-white/30 font-semibold hover:bg-white/10">See the Verses</a>
+    <section id="contact" className="relative py-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-400/20 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-6">
+          <ZapIcon className="h-4 w-4" />
+          Get Started
+        </div>
+        
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          Ready to transform your team's productivity?
+        </h2>
+        
+        <p className="mx-auto max-w-2xl text-lg text-amber-100 mb-8">
+          See how Lumicon can help your organization work smarter, not harder. Get in touch for a personalized demo.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
+          <a
+            href="#"
+            className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-amber-600 hover:bg-amber-50 transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Book a Demo
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+          <a
+            href="#"
+            className="inline-flex items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3.5 text-base font-medium text-white hover:bg-white/20 transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Contact Sales
+          </a>
+        </div>
+        
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-amber-100/80">
+          <div className="flex items-center gap-2">
+            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <span>No credit card required</span>
+          </div>
+          <div className="h-4 w-px bg-amber-200/30"></div>
+          <div className="flex items-center gap-2">
+            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <span>14-day free trial</span>
+          </div>
+          <div className="h-4 w-px bg-amber-200/30"></div>
+          <div className="flex items-center gap-2">
+            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <span>Cancel anytime</span>
+          </div>
         </div>
       </div>
     </section>
@@ -227,16 +658,85 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-10 text-sm text-slate-500 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <LogoMark className="h-5 w-5"/>
-          <span>© {new Date().getFullYear()} Lumicon AI, LLC</span>
+    <footer className="relative bg-gray-950 text-gray-400 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+          <div className="col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <LogoMark className="h-8 w-auto" />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">Lumicon</span>
+            </div>
+            <p className="text-sm text-gray-500 mt-2">
+              AI-powered knowledge retrieval and automation for modern teams. Secure, private, and built for the enterprise.
+            </p>
+            <div className="flex items-center gap-4 mt-6">
+              <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                <span className="sr-only">Twitter</span>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                <span className="sr-only">GitHub</span>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                <span className="sr-only">LinkedIn</span>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold text-white mb-4">Product</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Features</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Verses</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Integrations</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold text-white mb-4">Resources</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Documentation</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">API Reference</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Guides</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Blog</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold text-white mb-4">Company</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Legal</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="flex gap-6">
-          <a href="#" className="hover:text-slate-700">Privacy</a>
-          <a href="#" className="hover:text-slate-700">Terms</a>
-          <a href="#" className="hover:text-slate-700">Contact</a>
+        
+        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-600">
+            &copy; {new Date().getFullYear()} Lumicon AI. All rights reserved.
+          </p>
+          <div className="mt-4 md:mt-0 flex items-center gap-6">
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Security</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -252,19 +752,76 @@ function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
     />
   )
 }
-function Pill({ children }: { children: React.ReactNode }) { return <span className="px-3 py-1 rounded-full border border-slate-300 bg-white/50 text-slate-700 text-xs">{children}</span> }
-function Feature({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
-  return (<div className="rounded-3xl border border-slate-200 p-6 bg-white shadow-sm">
-    <div className="flex items-center gap-3">
-      <div className="h-9 w-9 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">{icon}</div>
-      <h3 className="font-semibold text-lg">{title}</h3>
-    </div>
-    <p className="mt-3 text-slate-600 text-sm">{desc}</p>
-  </div>)
+
+function CheckIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
+  )
 }
+
+function SparkIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  )
+}
+
+function CompassIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  )
+}
+
+function ZapIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  )
+}
+
+function ShieldIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  )
+}
+
+function ArrowRight({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  )
+}
+
+function Pill({ children }: { children: React.ReactNode }) { 
+  return <span className="px-3 py-1 rounded-full border border-slate-300 bg-white/50 text-slate-700 text-xs">{children}</span> 
+}
+
+function Feature({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
+  return (
+    <div className="rounded-3xl border border-slate-200 p-6 bg-white shadow-sm hover:shadow-glow transition-shadow">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">{icon}</div>
+        <h3 className="font-semibold text-lg">{title}</h3>
+      </div>
+      <p className="mt-3 text-slate-600 text-sm">{desc}</p>
+    </div>
+  )
+}
+
 function VerseCard({ title, tagline, points }: { title: string, tagline: string, points: string[] }) {
-  return (<div className="rounded-3xl border border-slate-200 p-6 bg-white shadow-sm hover:shadow-glow transition-shadow">
-    <div className="flex items-center gap-3">
+  return (
+    <div className="rounded-3xl border border-slate-200 p-6 bg-white shadow-sm hover:shadow-glow transition-shadow">
+      <div className="flex items-center gap-3">
       <LogoMark className="h-8 w-8" /><div><div className="font-semibold text-lg">{title}</div><div className="text-xs text-slate-500">{tagline}</div></div>
     </div>
     <ul className="mt-4 space-y-2 text-sm text-slate-700 list-disc pl-5">{points.map((p,i)=>(<li key={i}>{p}</li>))}</ul>
@@ -298,9 +855,3 @@ function ArchDiagram() {
     </svg>
   )
 }
-function CheckIcon({ className = "h-5 w-5" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>) }
-function SparkIcon({ className = "h-5 w-5" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg>) }
-function CompassIcon({ className = "h-5 w-5" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16 8 12 14 8 16 10 12 16 8"/></svg>) }
-function ZapIcon({ className = "h-5 w-5" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>) }
-function ShieldIcon({ className = "h-5 w-5" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>) }
-function ArrowRight({ className = "h-4 w-4" }: { className?: string }) { return (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>) }
