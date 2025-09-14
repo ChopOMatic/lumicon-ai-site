@@ -194,22 +194,12 @@ function Footer() {
 
 function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Lumicon logomark">
-      <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#g)" />
-      <g filter="url(#glow)">
-        <path d="M32 14 L35.5 28.5 L50 32 L35.5 35.5 L32 50 L28.5 35.5 L14 32 L28.5 28.5 Z" fill="white"/>
-      </g>
-      <defs>
-        <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FDBA74"/>
-          <stop offset="1" stopColor="#F97316"/>
-        </linearGradient>
-        <filter id="glow" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-          <feGaussianBlur stdDeviation="0.75"/>
-        </filter>
-      </defs>
-    </svg>
-  );
+    <img 
+      src="/logo.png" 
+      alt="Lumicon AI Logo" 
+      className={className} 
+    />
+  )
 }
 function Pill({ children }: { children: React.ReactNode }) { return <span className="px-3 py-1 rounded-full border border-slate-300 bg-white/50 text-slate-700 text-xs">{children}</span> }
 function Feature({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
