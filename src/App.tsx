@@ -17,21 +17,28 @@ export default function App() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 bg-white/70 backdrop-blur border-b border-slate-200">
-      <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
-          <LogoMark className="h-8 w-8" />
-          <span className="font-extrabold tracking-tight text-xl">LUMICON<span className="text-slate-500"> AI</span></span>
+    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-100 shadow-sm">
+      <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
+        <a href="#" className="flex items-center gap-3 group">
+          <LogoMark className="h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
+          <span className="font-extrabold tracking-tight text-2xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">LUMICON<span className="opacity-90"> AI</span></span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#verses" className="hover:text-slate-600">Verses</a>
-          <a href="#automation" className="hover:text-slate-600">Automation</a>
-          <a href="#security" className="hover:text-slate-600">Security</a>
-          <a href="#cases" className="hover:text-slate-600">Results</a>
-          <a href="#contact" className="hover:text-slate-600">Contact</a>
+          <a href="#verses" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Verses</a>
+          <a href="#automation" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Automation</a>
+          <a href="#security" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Security</a>
+          <a href="#cases" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Results</a>
+          <a href="#contact" className="text-slate-700 hover:text-blue-600 transition-colors duration-200 font-medium">Contact</a>
         </nav>
         <div className="flex items-center gap-3">
-          <a href="https://calendly.com/redforensic/10-minute-intro-meeting" target="_blank" rel="noreferrer" className="px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Book a Call</a>
+          <a 
+            href="https://calendly.com/redforensic/10-minute-intro-meeting" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          >
+            Book a Call
+          </a>
         </div>
       </div>
     </header>
@@ -40,31 +47,75 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative gradient-hero overflow-hidden">
-      <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-amber-200/60 blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-orange-300/50 blur-3xl" />
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-7">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-amber-50 px-3 py-1 text-amber-800 text-xs font-semibold">
-            <SparkIcon className="h-4 w-4" /> New: Conversant Dataverses for SMBs
+    <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-blue-100/70 blur-3xl animate-float" />
+        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-indigo-100/60 blur-3xl animate-float animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 blur-3xl opacity-50" />
+      </div>
+      
+      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32 grid lg:grid-cols-12 gap-16 items-center">
+        <div className="lg:col-span-7 space-y-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-4 py-1.5 text-sm font-medium text-blue-700 shadow-sm backdrop-blur-sm hover:shadow-md transition-all duration-300">
+            <SparkIcon className="h-4 w-4 text-blue-500 flex-shrink-0" /> 
+            <span className="whitespace-nowrap">New: Conversant Dataverses for SMBs</span>
+            <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse-slow"></span>
           </div>
-          <h1 className="mt-6 text-4xl sm:text-5xl font-extrabold tracking-tight">
-            Build your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">conversant dataverse</span> and automate the busywork
-          </h1>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl">
-            Lumicon AI creates local, secure dataverses and workflow automations so your team can ask questions of all your data—and get answers instantly.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="https://calendly.com/redforensic/10-minute-intro-meeting" target="_blank" rel="noreferrer" className="px-5 py-3 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 font-semibold">Book a Strategy Call</a>
-            <a href="#verses" className="px-5 py-3 rounded-2xl border border-slate-300 hover:bg-slate-50 font-semibold">Explore Verses</a>
+          
+          <div className="space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900">
+              <span className="block">Build your </span>
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  conversant dataverse
+                </span>
+                <span className="absolute -bottom-1 left-0 right-0 h-3 bg-blue-100/60 -z-0 rounded-full"></span>
+              </span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
+              Transform your business with AI-powered dataverses that understand your data and automate your workflows—securely and locally deployed.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a 
+                href="https://calendly.com/redforensic/10-minute-intro-meeting" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 group"
+              >
+                <span>Book a Strategy Call</span>
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a 
+                href="#verses" 
+                className="px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 flex items-center gap-2"
+              >
+                Explore Verses
+              </a>
+            </div>
+            
+            <div className="pt-2 flex items-center text-sm text-slate-500">
+              <div className="flex -space-x-2 mr-3">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="h-8 w-8 rounded-full bg-white border-2 border-white shadow-sm overflow-hidden">
+                    <div className="h-full w-full bg-gradient-to-br from-blue-100 to-indigo-100"></div>
+                  </div>
+                ))}
+              </div>
+              <span>Trusted by innovative teams worldwide</span>
+            </div>
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-slate-500">
+
+          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
             <Pill>Local / VPC</Pill>
             <Pill>Encryption in transit & at rest</Pill>
             <Pill>RBAC & SSO</Pill>
             <Pill>Human-in-the-loop</Pill>
           </div>
         </div>
+        
         <div className="lg:col-span-5">
           <div className="rounded-3xl border border-slate-200 shadow-sm p-6 bg-white">
             <div className="flex items-center gap-3">
@@ -77,7 +128,7 @@ function Hero() {
             <div className="mt-6 space-y-3 text-sm">
               <SampleQA q="Show me similar matters to Smith v. Metro and draft a pleading." a="Found 12 similar actions. Drafted a pleading using strongest arguments from prior wins." />
               <SampleQA q="List clients with upcoming renewals where NPS < 7." a="7 clients due next 30 days with NPS < 7. Prepared outreach sequence." />
-              <SampleQA q="Summarize last quarter’s revenue drivers." a="Top drivers: referrals (+22%), tax planning upsells (+11%)." />
+              <SampleQA q="Summarize last quarter's revenue drivers." a="Top drivers: referrals (+22%), tax planning upsells (+11%)." />
             </div>
           </div>
         </div>
