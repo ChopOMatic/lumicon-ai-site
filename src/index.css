@@ -26,3 +26,16 @@
   filter: blur(10px);
   pointer-events: none;
 }
+
+/* Rich gradient wash inspired by event theme */
+.bg-wash::before{
+  content: "";
+  position: absolute; inset: -25% -15% -15% -15%;
+  background:
+    radial-gradient(800px 480px at 80% 5%, rgba(56,189,248,0.18), transparent 60%),
+    radial-gradient(900px 520px at 10% 10%, rgba(168,85,247,0.16), transparent 60%),
+    radial-gradient(700px 440px at 50% 100%, rgba(236,72,153,0.10), transparent 70%),
+    conic-gradient(from 220deg at 50% 30%, rgba(99,102,241,0.08), rgba(236,72,153,0.06), rgba(20,184,166,0.06), rgba(99,102,241,0.08));
+  filter: blur(12px) saturate(110%);
+  pointer-events: none;
+}

@@ -8,6 +8,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative bg-background text-gray-100 antialiased bg-grid">
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-wash" aria-hidden="true"></div>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
       <Header />
       <Hero />
@@ -201,7 +202,7 @@ function Verses() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Productized <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Dataverses</span>
           </h2>
-          <p className="text-lg text-gray-300">
+          <p className="text-lg text-gray-200">
             Industry-tuned knowledge + retrieval so teams can converse with their entire universe of data—securely, locally, and fast.
           </p>
         </div>
@@ -324,7 +325,7 @@ function Automation() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Automate the Busywork — <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Keep Humans in Control</span>
           </h2>
-          <p className="text-lg text-gray-300">
+          <p className="text-lg text-gray-200">
             Agentic workflows that plan multi-step tasks, call tools (calendar, CRM, docs), and request human approval at decision points.
           </p>
         </div>
@@ -503,7 +504,7 @@ function CaseStudies() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Trusted by <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Innovative Teams</span>
           </h2>
-          <p className="text-lg text-gray-300">
+          <p className="text-lg text-gray-200">
             See how organizations are transforming their operations with Lumicon AI.
           </p>
         </div>
