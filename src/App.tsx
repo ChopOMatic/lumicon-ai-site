@@ -78,11 +78,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-24 md:pt-40">
       {/* Background gradient */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-950 to-gray-900"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(80%_50%_at_80%_0%,rgba(34,211,238,.12),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_10%_10%,rgba(167,139,250,.10),transparent_60%)]"></div>
-      </div>
+      <div className="absolute inset-0 -z-10"></div>
       
       {/* Floating elements */}
       <div className="absolute -top-40 -right-40 w-[800px] h-[800px] rounded-full bg-blue-500/10 blur-3xl animate-float"></div>
@@ -315,10 +311,7 @@ function Automation() {
   return (
     <section id="automation" className="relative py-24 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 -z-10"></div>
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -411,10 +404,7 @@ function Security() {
   return (
     <section id="security" className="relative py-24 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 -z-10"></div>
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -490,10 +480,7 @@ function CaseStudies() {
   return (
     <section id="cases" className="relative py-24 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent"></div>
-      </div>
+      <div className="absolute inset-0 -z-10"></div>
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
