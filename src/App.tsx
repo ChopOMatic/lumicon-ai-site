@@ -36,42 +36,9 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative text-gray-100 antialiased bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-x-hidden">
-      {/* Animated background gradients */}
-      <div className="fixed inset-0 -z-50 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,91%,60%,0.05),transparent_80%)]"></div>
-        <div className="absolute inset-0 [background:radial-gradient(circle_at_50%_100%,hsl(217,91%,60%,0.1),transparent_80%)]"></div>
-        <div className="absolute inset-0 [background:radial-gradient(circle_at_100%_50%,hsl(262,83%,58%,0.1),transparent_80%)]"></div>
-        <div className="absolute inset-0 [background:radial-gradient(circle_at_0%_50%,hsl(329,86%,70%,0.1),transparent_80%)]"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950"></div>
-      </div>
-      
-      {/* Animated grid */}
-      <div className="fixed inset-0 -z-40 [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]">
-        <div className="h-full w-full [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
-      
-      {/* Floating orbs with glow */}
-      <div className="fixed -z-30 h-[500px] w-[500px] -top-[250px] -left-[250px] rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-[100px] animate-float"></div>
-      <div className="fixed -z-30 h-[600px] w-[600px] -bottom-[300px] -right-[300px] rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-[120px] animate-float-slow animation-delay-2000"></div>
-      
-      {/* Subtle particle effect */}
-      <div className="fixed inset-0 -z-20 opacity-10">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div 
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: `${Math.random() * 4 + 1}px`,
-              height: `${Math.random() * 4 + 1}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-              animationDelay: `${Math.random() * 5}s`
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen relative bg-background text-gray-100 antialiased">
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-wash" aria-hidden="true"></div>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
       <Header />
       <Hero />
       <Verses />
