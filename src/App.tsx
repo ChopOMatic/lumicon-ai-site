@@ -76,7 +76,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40">
+    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 wash-hero">
       {/* Background gradient */}
       <div className="absolute inset-0 -z-10"></div>
       
