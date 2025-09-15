@@ -7,7 +7,15 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative bg-background text-gray-100 antialiased bg-grid">
+    <div className="min-h-screen relative text-gray-100 antialiased" style={{
+      background: `
+        radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(168, 85, 247, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom center, rgba(236, 72, 153, 0.3) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(168, 85, 247, 0.3) 50%, rgba(236, 72, 153, 0.2) 100%),
+        #0a0a0a
+      `
+    }}>
       <div className="pointer-events-none absolute inset-0 -z-20 bg-wash" aria-hidden="true"></div>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
       <Header />
