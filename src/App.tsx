@@ -36,7 +36,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative bg-black text-gray-100 antialiased">
+    <div className="min-h-screen relative bg-gray-950 text-gray-100 antialiased">
       <Header />
       <Hero />
       <Verses />
@@ -184,7 +184,7 @@ function Hero() {
           </div>
           
           <div className="relative">
-            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 border border-gray-800/60 shadow-neon glow-card mouse-follow-effect">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 p-6 border border-gray-800/40 shadow-neon glow-card mouse-follow-effect">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-3 w-3 rounded-full bg-red-500"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
@@ -281,7 +281,7 @@ function Hero() {
           </div>
           
           <div className="relative">
-            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 border border-gray-800/60 shadow-neon">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-950 to-gray-900 p-6 border border-gray-800/40 shadow-neon">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-3 w-3 rounded-full bg-red-500"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
@@ -323,7 +323,7 @@ function Verses() {
     <section id="verses" className="relative py-24 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-950"></div>
+        <div className="absolute inset-0 bg-gray-950"></div>
         <div className="absolute inset-0 [background:radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.03),transparent_70%)]"></div>
       </div>
       
@@ -417,7 +417,7 @@ function Verses() {
               key={index}
               className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-px backdrop-blur-sm glow-card mouse-follow-effect`}
             >
-              <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
+              <div className="h-full rounded-2xl bg-gray-950/90 p-6 backdrop-blur-sm border border-gray-800/30">
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`p-2 rounded-lg bg-${verse.color}-500/10`}>
                     {verse.icon}
@@ -500,7 +500,7 @@ function Automation() {
               key={index}
               className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${feature.gradient} p-0.5 backdrop-blur-sm shadow-neon`}
             >
-              <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
+              <div className="h-full rounded-2xl bg-gray-950/90 p-6 backdrop-blur-sm border border-gray-800/30">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-gray-800/50 text-blue-400">
                     {feature.icon}
@@ -603,7 +603,7 @@ function Security() {
           </div>
           
           <div className="relative">
-            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 border border-gray-700/50 shadow-2xl overflow-hidden">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 p-6 border border-gray-800/40 shadow-2xl overflow-hidden">
               <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 rounded-full bg-emerald-500/10 blur-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-2 text-sm font-medium text-emerald-400 mb-6">
