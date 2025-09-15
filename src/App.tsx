@@ -36,9 +36,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative bg-background text-gray-100 antialiased">
-      <div className="pointer-events-none absolute inset-0 -z-20 bg-wash" aria-hidden="true"></div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
+    <div className="min-h-screen relative bg-black text-gray-100 antialiased">
       <Header />
       <Hero />
       <Verses />
