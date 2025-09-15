@@ -7,7 +7,8 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-gray-100 antialiased">
+    <div className="min-h-screen relative bg-background text-gray-100 antialiased bg-grid">
+      <div className="absolute inset-0 bg-glow" aria-hidden="true"></div>
       <Header />
       <Hero />
       <Verses />
@@ -33,12 +34,12 @@ function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-gray-900/80 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+      scrolled ? 'bg-gray-900/70 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <LogoMark className="h-8 w-auto" />
-          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">Lumicon</span>
+          <span className="text-xl font-bold font-display tracking-tight bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(34,211,238,0.25)]">Lumicon</span>
         </a>
         
         <nav className="hidden md:flex items-center gap-8">
@@ -61,7 +62,7 @@ function Header() {
             href="https://calendly.com/redforensic/10-minute-intro-meeting" 
             target="_blank" 
             rel="noreferrer"
-            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all"
+            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-500 text-gray-900 text-sm font-semibold hover:shadow-neon transition-all"
           >
             Get Started
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -77,9 +78,9 @@ function Hero() {
     <section className="relative overflow-hidden pt-32 pb-24 md:pt-40">
       {/* Background gradient */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-950"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-5"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-950 to-gray-900"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(80%_50%_at_80%_0%,rgba(34,211,238,.12),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_10%_10%,rgba(167,139,250,.10),transparent_60%)]"></div>
       </div>
       
       {/* Floating elements */}
@@ -97,9 +98,9 @@ function Hero() {
               <span className="text-sm font-medium text-blue-400">Now available for early access</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight">
               <span className="block text-white">Build your</span>
-              <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">conversant dataverse</span>
+              <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-purple-300 bg-clip-text text-transparent">conversant dataverse</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed">
@@ -111,14 +112,14 @@ function Hero() {
                 href="https://calendly.com/redforensic/10-minute-intro-meeting" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-500 text-gray-900 font-semibold hover:shadow-neon transition-all duration-300 flex items-center gap-2 group"
               >
                 <span>Book a Strategy Call</span>
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="#verses" 
-                className="px-6 py-3.5 rounded-lg bg-gray-800/50 border border-gray-700 text-gray-300 font-medium hover:bg-gray-800/80 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg bg-gray-800/60 border border-gray-700 text-gray-200 font-medium hover:bg-gray-800/80 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
               >
                 Explore Verses
               </a>
@@ -149,7 +150,7 @@ function Hero() {
           </div>
           
           <div className="relative">
-            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 border border-gray-700/50 shadow-2xl">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 border border-gray-800/60 shadow-neon">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-3 w-3 rounded-full bg-red-500"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
@@ -159,17 +160,17 @@ function Hero() {
               
               <div className="font-mono text-sm text-gray-300 space-y-4">
                 <div className="flex">
-                  <span className="text-blue-400">$</span>
+                  <span className="text-cyan-300">$</span>
                   <span className="ml-2">lumicon init --verse legal</span>
                 </div>
-                <div className="text-green-400">✓ Initialized LegalVerse workspace</div>
-                <div className="text-green-400">✓ Connected to secure VPC</div>
-                <div className="text-green-400">✓ Authenticated with SSO</div>
+                <div className="text-emerald-400">✓ Initialized LegalVerse workspace</div>
+                <div className="text-emerald-400">✓ Connected to secure VPC</div>
+                <div className="text-emerald-400">✓ Authenticated with SSO</div>
                 <div className="pt-2">
                   <div className="flex">
-                  <span className="text-blue-400">$</span>
-                  <span className="ml-2 text-gray-400">lumicon query "Show pending cases with high priority"</span>
-                </div>
+                    <span className="text-cyan-300">$</span>
+                    <span className="ml-2 text-gray-400">lumicon query "Show pending cases with high priority"</span>
+                  </div>
                 </div>
                 <div className="text-green-400">✓ Found 3 high-priority cases</div>
                 <div className="pl-4 text-gray-400">• Smith v. Metro (Due: 2d) - Discovery</div>
@@ -178,7 +179,7 @@ function Hero() {
               </div>
             </div>
             
-            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 -z-10 blur-xl"></div>
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl bg-gradient-to-br from-cyan-400/15 to-purple-400/15 -z-10 blur-xl"></div>
           </div>
         </div>
       </div>
@@ -197,7 +198,7 @@ function Verses() {
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Productized <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Dataverses</span>
           </h2>
           <p className="text-lg text-gray-400">
@@ -270,7 +271,7 @@ function Verses() {
           ].map((verse, index) => (
             <div 
               key={index}
-              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-0.5 backdrop-blur-sm`}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-0.5 backdrop-blur-sm shadow-neon`}
             >
               <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
                 <div className="mb-4 flex items-center justify-between">
@@ -320,7 +321,7 @@ function Automation() {
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Automate the Busywork — <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Keep Humans in Control</span>
           </h2>
           <p className="text-lg text-gray-400">
@@ -351,7 +352,7 @@ function Automation() {
           ].map((feature, index) => (
             <div 
               key={index}
-              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${feature.gradient} p-0.5 backdrop-blur-sm`}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${feature.gradient} p-0.5 backdrop-blur-sm shadow-neon`}
             >
               <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
                 <div className="flex items-start gap-4">
@@ -422,7 +423,7 @@ function Security() {
               Enterprise-Grade Security
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white">
               Local, Private, and <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Secure by Design</span>
             </h2>
             
@@ -499,7 +500,7 @@ function CaseStudies() {
             <SparkIcon className="h-4 w-4" />
             Success Stories
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Trusted by <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Innovative Teams</span>
           </h2>
           <p className="text-lg text-gray-400">
@@ -536,7 +537,7 @@ function CaseStudies() {
           ].map((caseStudy, index) => (
             <div 
               key={index}
-              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${caseStudy.gradient} p-0.5 backdrop-blur-sm`}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${caseStudy.gradient} p-0.5 backdrop-blur-sm shadow-neon`}
             >
               <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
                 <div className="flex items-center gap-4">
@@ -601,8 +602,8 @@ function CTA() {
     <section id="contact" className="relative py-24 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-400/20 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
       </div>
       
       <div className="relative max-w-7xl mx-auto px-6 text-center">
@@ -611,43 +612,43 @@ function CTA() {
           Get Started
         </div>
         
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+        <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
           Ready to transform your team's productivity?
         </h2>
         
-        <p className="mx-auto max-w-2xl text-lg text-amber-100 mb-8">
+        <p className="mx-auto max-w-2xl text-lg text-white/90 mb-8">
           See how Lumicon can help your organization work smarter, not harder. Get in touch for a personalized demo.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
           <a
             href="#"
-            className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-amber-600 hover:bg-amber-50 transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+            className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-gray-900 hover:bg-slate-100 transition-all transform hover:-translate-y-0.5 hover:shadow-neon"
           >
             Book a Demo
             <ArrowRight className="ml-2 h-4 w-4" />
           </a>
           <a
             href="#"
-            className="inline-flex items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3.5 text-base font-medium text-white hover:bg-white/20 transition-all transform hover:-translate-y-0.5 hover:shadow-lg"
+            className="inline-flex items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3.5 text-base font-medium text-white hover:bg-white/20 transition-all transform hover:-translate-y-0.5 hover:shadow-neon"
           >
             Contact Sales
           </a>
         </div>
         
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-amber-100/80">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-white/80">
           <div className="flex items-center gap-2">
-            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <CheckIcon className="h-4 w-4 text-white/90" />
             <span>No credit card required</span>
           </div>
           <div className="h-4 w-px bg-amber-200/30"></div>
           <div className="flex items-center gap-2">
-            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <CheckIcon className="h-4 w-4 text-white/90" />
             <span>14-day free trial</span>
           </div>
           <div className="h-4 w-px bg-amber-200/30"></div>
           <div className="flex items-center gap-2">
-            <CheckIcon className="h-4 w-4 text-amber-300" />
+            <CheckIcon className="h-4 w-4 text-white/90" />
             <span>Cancel anytime</span>
           </div>
         </div>

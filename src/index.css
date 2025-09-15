@@ -1,7 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root{color-scheme:light}
-.gradient-hero{background:radial-gradient(60% 60% at 75% 25%, rgba(251,146,60,.15) 0%, rgba(253,186,116,.10) 40%, transparent 70%);}
-.card{@apply rounded-3xl border border-slate-200 bg-white shadow-sm;}
-.kbd{@apply inline-flex items-center rounded-md border border-slate-300 px-2 py-0.5 text-xs font-medium text-slate-600;}
+.font-display{font-family: 'Space Grotesk', Inter, system-ui, sans-serif;}
+.font-mono{font-family: 'Space Mono', ui-monospace, SFMono-Regular, Monaco, monospace;}
+
+/* Type scale utilities to echo event-microsite rhythm */
+.leading-tight-hero{line-height:1.05}
+.tracking-hero{-letter-spacing:-0.02em}
+:root{color-scheme:dark}
+.gradient-hero{background:radial-gradient(60% 60% at 75% 25%, rgba(34,211,238,.15) 0%, rgba(167,139,250,.12) 40%, transparent 70%);} 
+.card{@apply rounded-3xl border border-slate-800 bg-gray-900/80 shadow-glass backdrop-blur-sm;}
+.kbd{@apply inline-flex items-center rounded-md border border-slate-700 px-2 py-0.5 text-xs font-medium text-slate-300;}
+
+/* Themed background grid + glow */
+.bg-grid {
+  background-image: theme('backgroundImage.grid-slate');
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+.bg-glow::before{
+  content: "";
+  position: absolute; inset: -20% -10% -10% -10%;
+  background: radial-gradient(600px 300px at 85% 10%, rgba(34,211,238,.12), transparent 60%),
+              radial-gradient(500px 260px at 10% 20%, rgba(167,139,250,.10), transparent 60%);
+  filter: blur(10px);
+  pointer-events: none;
+}
