@@ -1,23 +1,77 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { 
+  Scale as ScaleIcon, 
+  DollarSign as CurrencyDollarIcon, 
+  FileText as DocumentTextIcon, 
+  MessageSquare as ChatBubbleLeftRightIcon,
+  Settings as Cog6ToothIcon,
+  Rocket as RocketLaunchIcon,
+  ArrowRight as ArrowRightIcon,
+  Check as CheckIcon,
+  Sparkles as SparkIcon,
+  Compass as CompassIcon,
+  Zap as ZapIcon,
+  Shield as ShieldIcon
+} from 'lucide-react';
 
 export default function App() {
-  // Set dark mode by default
+  // Set dark mode by default and add mouse move effect for glow
   useEffect(() => {
     document.documentElement.classList.add('dark')
+    
+    // Mouse move effect for glow
+    const handleMouseMove = (e: MouseEvent) => {
+      const cards = document.querySelectorAll('.mouse-follow-effect');
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+      });
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
   }, [])
 
   return (
-    <div className="min-h-screen relative text-gray-100 antialiased" style={{
-      background: `
-        radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at top right, rgba(168, 85, 247, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom center, rgba(236, 72, 153, 0.3) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(168, 85, 247, 0.3) 50%, rgba(236, 72, 153, 0.2) 100%),
-        #0a0a0a
-      `
-    }}>
-      <div className="pointer-events-none absolute inset-0 -z-20 bg-wash" aria-hidden="true"></div>
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
+    <div className="min-h-screen relative text-gray-100 antialiased bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 overflow-x-hidden">
+      {/* Animated background gradients */}
+      <div className="fixed inset-0 -z-50 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,91%,60%,0.05),transparent_80%)]"></div>
+        <div className="absolute inset-0 [background:radial-gradient(circle_at_50%_100%,hsl(217,91%,60%,0.1),transparent_80%)]"></div>
+        <div className="absolute inset-0 [background:radial-gradient(circle_at_100%_50%,hsl(262,83%,58%,0.1),transparent_80%)]"></div>
+        <div className="absolute inset-0 [background:radial-gradient(circle_at_0%_50%,hsl(329,86%,70%,0.1),transparent_80%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950"></div>
+      </div>
+      
+      {/* Animated grid */}
+      <div className="fixed inset-0 -z-40 [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]">
+        <div className="h-full w-full [background-image:linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      </div>
+      
+      {/* Floating orbs with glow */}
+      <div className="fixed -z-30 h-[500px] w-[500px] -top-[250px] -left-[250px] rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-[100px] animate-float"></div>
+      <div className="fixed -z-30 h-[600px] w-[600px] -bottom-[300px] -right-[300px] rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-[120px] animate-float-slow animation-delay-2000"></div>
+      
+      {/* Subtle particle effect */}
+      <div className="fixed inset-0 -z-20 opacity-10">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div 
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: `${Math.random() * 4 + 1}px`,
+              height: `${Math.random() * 4 + 1}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          />
+        ))}
+      </div>
       <Header />
       <Hero />
       <Verses />
@@ -31,31 +85,44 @@ export default function App() {
 }
 
 function Header() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-gray-900/70 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-gray-900/80 backdrop-blur-md border-b border-white/5 shadow-xl' 
+        : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
-          <LogoMark className="h-8 w-auto" />
-          <span className="text-xl font-bold font-display tracking-tight bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(34,211,238,0.25)]">Lumicon</span>
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative bg-gray-900 p-2 rounded-lg">
+              <LogoMark className="h-6 w-6 text-white" />
+            </div>
+          </div>
+          <span className="text-xl font-bold font-display tracking-tight text-gradient glow-text">Lumicon</span>
         </a>
         
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#verses" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Verses</a>
-          <a href="#automation" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Automation</a>
-          <a href="#security" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Security</a>
-          <a href="#case-studies" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Case Studies</a>
+        <nav className="hidden md:flex items-center gap-6">
+          {['Verses', 'Automation', 'Security', 'Case Studies'].map((item) => (
+            <a 
+              key={item}
+              href={`#${item.toLowerCase().replace(' ', '-')}`} 
+              className="text-sm font-medium text-gray-400 hover:text-white transition-colors relative group"
+            >
+              {item}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
         </nav>
         
         <div className="flex items-center gap-4">
@@ -63,7 +130,7 @@ function Header() {
             href="https://calendly.com/redforensic/10-minute-intro-meeting" 
             target="_blank" 
             rel="noreferrer"
-            className="hidden md:inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors"
+            className="hidden md:inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all border border-white/10 hover:border-white/20"
           >
             Book a Call
           </a>
@@ -71,10 +138,14 @@ function Header() {
             href="https://calendly.com/redforensic/10-minute-intro-meeting" 
             target="_blank" 
             rel="noreferrer"
-            className="inline-flex items-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-500 text-gray-900 text-sm font-semibold hover:shadow-neon transition-all"
+            className="group relative overflow-hidden px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all"
           >
-            Get Started
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute inset-0.5 rounded bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative flex items-center">
+              <span>Get Started</span>
+              <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </div>
           </a>
         </div>
       </div>
@@ -84,13 +155,103 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 wash-hero">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10"></div>
-      
-      {/* Floating elements */}
-      <div className="absolute -top-40 -right-40 w-[800px] h-[800px] rounded-full bg-blue-500/10 blur-3xl animate-float"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-3xl animate-float animation-delay-2000"></div>
+    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40">
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8 relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/70 border border-gray-700 backdrop-blur-sm glow-effect">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span className="text-sm font-medium text-blue-400">Now available for early access</span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight">
+              <span className="block text-white">Build your</span>
+              <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-purple-300 bg-clip-text text-transparent">conversant dataverse</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+              Transform your business with AI-powered dataverses that understand your data and automate your workflows—securely and locally deployed.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a 
+                href="https://calendly.com/redforensic/10-minute-intro-meeting" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-glow transition-all duration-300 flex items-center gap-2 group"
+              >
+                <span>Book a Strategy Call</span>
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a 
+                href="#verses" 
+                className="px-6 py-3.5 rounded-lg bg-gray-800/80 border border-gray-700 text-gray-100 font-medium hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
+              >
+                Explore Verses
+              </a>
+            </div>
+            
+            <div className="pt-2 flex items-center text-sm text-gray-500">
+              <div className="flex -space-x-2 mr-3">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="h-8 w-8 rounded-full border-2 border-gray-800 overflow-hidden">
+                    <div className="h-full w-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20"></div>
+                  </div>
+                ))}
+              </div>
+              <span>Trusted by innovative teams worldwide</span>
+            </div>
+            
+            <div className="flex flex-wrap gap-3 pt-4">
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                Local / VPC
+              </div>
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                End-to-end encryption
+              </div>
+              <div className="px-3 py-1.5 rounded-md bg-gray-800/50 text-xs font-medium text-gray-300 border border-gray-700/50">
+                RBAC & SSO
+              </div>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="relative z-10 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 border border-gray-800/60 shadow-neon glow-card mouse-follow-effect">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                <div className="flex-1 text-center text-sm font-medium text-gray-400">terminal</div>
+              </div>
+              
+              <div className="font-mono text-sm text-gray-300 space-y-4">
+                <div className="flex">
+                  <span className="text-cyan-300">$</span>
+                  <span className="ml-2">lumicon init --verse legal</span>
+                </div>
+                <div className="text-emerald-400">✓ Initialized LegalVerse workspace</div>
+                <div className="text-emerald-400">✓ Connected to secure VPC</div>
+                <div className="text-emerald-400">✓ Authenticated with SSO</div>
+                <div className="pt-2">
+                  <div className="flex">
+                    <span className="text-cyan-300">$</span>
+                    <span className="ml-2 text-gray-400">lumicon query "Show pending cases with high priority"</span>
+                  </div>
+                </div>
+                <div className="text-green-400">✓ Found 3 high-priority cases</div>
+                <div className="pl-4 text-gray-400">• Smith v. Metro (Due: 2d) - Discovery</div>
+                <div className="pl-4 text-gray-400">• Johnson LLC (Due: 3d) - Contract Review</div>
+                <div className="pl-4 text-gray-400">• Acme Corp (Due: 5d) - Compliance</div>
+              </div>
+            </div>
+            
+            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl bg-gradient-to-br from-cyan-400/15 to-purple-400/15 -z-10 blur-xl"></div>
+          </div>
+        </div>
+      </div>
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -196,17 +357,18 @@ function Verses() {
   return (
     <section id="verses" className="relative py-24 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+      <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-950"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 [background:radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.03),transparent_70%)]"></div>
       </div>
       
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 relative">
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full bg-blue-500/10 blur-3xl -z-10"></div>
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
-            Productized <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Dataverses</span>
+            Productized <span className="text-gradient">Dataverses</span>
           </h2>
-          <p className="text-lg text-gray-200">
+          <p className="text-lg text-gray-300">
             Industry-tuned knowledge + retrieval so teams can converse with their entire universe of data—securely, locally, and fast.
           </p>
         </div>
@@ -221,7 +383,9 @@ function Verses() {
                 "Rapid first drafts & argument extraction",
                 "Local/VPC deployment with audit trails"
               ],
-              gradient: "from-blue-500/10 to-blue-600/10"
+              gradient: "from-blue-500/10 to-blue-600/10",
+              icon: <ScaleIcon className="h-6 w-6 text-blue-400" />,
+              color: "blue"
             },
             {
               title: "WealthVerse",
@@ -231,7 +395,9 @@ function Verses() {
                 "Surface what worked (and didn't)",
                 "Assist prep for reviews & outreach"
               ],
-              gradient: "from-emerald-500/10 to-emerald-600/10"
+              gradient: "from-emerald-500/10 to-emerald-600/10",
+              icon: <CurrencyDollarIcon className="h-6 w-6 text-emerald-400" />,
+              color: "emerald"
             },
             {
               title: "TaxVerse",
@@ -241,7 +407,9 @@ function Verses() {
                 "Auto-summarize changes & deadlines",
                 "Draft client-ready explanations"
               ],
-              gradient: "from-purple-500/10 to-purple-600/10"
+              gradient: "from-purple-500/10 to-purple-600/10",
+              icon: <DocumentTextIcon className="h-6 w-6 text-purple-400" />,
+              color: "purple"
             },
             {
               title: "SupportVerse",
@@ -251,7 +419,9 @@ function Verses() {
                 "Auto-tag & route complex cases",
                 "QA & insights on deflection"
               ],
-              gradient: "from-amber-500/10 to-amber-600/10"
+              gradient: "from-amber-500/10 to-amber-600/10",
+              icon: <ChatBubbleLeftRightIcon className="h-6 w-6 text-amber-400" />,
+              color: "amber"
             },
             {
               title: "OpsVerse",
@@ -261,7 +431,9 @@ function Verses() {
                 "Scheduling, approvals, CRM sync",
                 "KPIs with real-time alerts"
               ],
-              gradient: "from-rose-500/10 to-rose-600/10"
+              gradient: "from-rose-500/10 to-rose-600/10",
+              icon: <Cog6ToothIcon className="h-6 w-6 text-rose-400" />,
+              color: "rose"
             },
             {
               title: "SalesVerse",
@@ -271,37 +443,44 @@ function Verses() {
                 "Competitive insights on demand",
                 "Auto-assemble collateral"
               ],
-              gradient: "from-indigo-500/10 to-indigo-600/10"
+              gradient: "from-indigo-500/10 to-indigo-600/10",
+              icon: <RocketLaunchIcon className="h-6 w-6 text-indigo-400" />,
+              color: "indigo"
             }
           ].map((verse, index) => (
             <div 
               key={index}
-              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-0.5 backdrop-blur-sm shadow-neon`}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${verse.gradient} p-px backdrop-blur-sm glow-card mouse-follow-effect`}
             >
               <div className="h-full rounded-2xl bg-gray-900/80 p-6 backdrop-blur-sm">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-white">{verse.title}</h3>
-                  <div className="inline-flex items-center rounded-full bg-gray-800 px-3 py-1 text-xs font-medium text-gray-300">
-                    {verse.tagline}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`p-2 rounded-lg bg-${verse.color}-500/10`}>
+                    {verse.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-white">{verse.title}</h3>
+                    <p className="text-sm text-gray-400">{verse.tagline}</p>
                   </div>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-3 mt-6">
                   {verse.points.map((point, i) => (
-                    <li key={i} className="flex items-start">
-                      <svg className="h-5 w-5 flex-shrink-0 text-blue-400 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-400">{point}</span>
+                    <li key={i} className="flex items-start group">
+                      <div className="flex-shrink-0 mt-0.5 mr-3 flex items-center justify-center h-5 w-5 rounded-full bg-gray-800/50 border border-gray-700 group-hover:bg-gray-800 transition-colors">
+                        <svg className={`h-3 w-3 text-${verse.color}-400`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-300 group-hover:text-white transition-colors">{point}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6">
+                <div className="mt-6 pt-4 border-t border-gray-800">
                   <a 
                     href="#contact" 
-                    className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group-hover:translate-x-1 duration-300"
+                    className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white transition-colors group-hover:translate-x-1 duration-300"
                   >
-                    Learn more
-                    <svg className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    Learn more about {verse.title}
+                    <svg className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
@@ -786,7 +965,7 @@ function ZapIcon({ className = "h-5 w-5" }: { className?: string }) {
 function ShieldIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.008-2.052-.013-3.016z" />
     </svg>
   )
 }

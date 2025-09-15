@@ -1,5 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,9 +12,24 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        'glow-sm': '0 0 2px 0 rgba(96, 165, 250, 0.5)',
+        'glow': '0 0 6px 2px rgba(96, 165, 250, 0.4)',
+        'glow-md': '0 0 15px 3px rgba(96, 165, 250, 0.3)',
+        'glow-lg': '0 0 30px 10px rgba(96, 165, 250, 0.25)',
+        'glow-xl': '0 0 60px 15px rgba(96, 165, 250, 0.2)',
+        'glow-2xl': '0 0 100px 30px rgba(96, 165, 250, 0.15)',
+        'inner-glow': 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
+      },
       colors: {
         background: '#0A0A0A',
         surface: '#111111',
+        glow: {
+          blue: 'rgba(59, 130, 246, 0.5)',
+          purple: 'rgba(139, 92, 246, 0.5)',
+          pink: 'rgba(236, 72, 153, 0.5)',
+          cyan: 'rgba(34, 211, 238, 0.5)',
+        },
         accent: {
           blue: '#22d3ee',
           purple: '#a78bfa',
@@ -68,6 +88,8 @@ module.exports = {
         'gradient': 'gradient 8s ease infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'float-slow': 'float 8s ease-in-out infinite',
+        'glow': 'glow 3s ease-in-out infinite alternate',
+        'glow-slow': 'glow 6s ease-in-out infinite alternate',
       },
       keyframes: {
         float: {
@@ -80,6 +102,14 @@ module.exports = {
           },
           '50%': {
             'background-position': '100% 50%',
+          },
+        },
+        glow: {
+          '0%': {
+            'box-shadow': '0 0 2px 0 rgba(96, 165, 250, 0.5)',
+          },
+          '100%': {
+            'box-shadow': '0 0 15px 5px rgba(96, 165, 250, 0.3)',
           },
         },
       },
@@ -104,6 +134,46 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.glow-effect': {
+          position: 'relative',
+          zIndex: '1',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            borderRadius: 'inherit',
+            padding: '1px',
+            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(168, 85, 247, 0.4))',
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude',
+            pointerEvents: 'none',
+          },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            borderRadius: 'inherit',
+            background: 'radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.1), transparent 40%)',
+            opacity: '0',
+            transition: 'opacity 0.3s ease',
+            pointerEvents: 'none',
+          },
+          '&:hover::after': {
+            opacity: '1',
+          },
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
     function({ addUtilities }) {
       const newUtilities = {
         '.animation-delay-2000': {
