@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative bg-background text-gray-100 antialiased bg-grid">
-      <div className="absolute inset-0 bg-glow" aria-hidden="true"></div>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-glow" aria-hidden="true"></div>
       <Header />
       <Hero />
       <Verses />
@@ -90,7 +90,7 @@ function Hero() {
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/70 border border-gray-700 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
@@ -103,7 +103,7 @@ function Hero() {
               <span className="block bg-gradient-to-r from-cyan-300 via-sky-300 to-purple-300 bg-clip-text text-transparent">conversant dataverse</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
               Transform your business with AI-powered dataverses that understand your data and automate your workflows—securely and locally deployed.
             </p>
             
@@ -119,7 +119,7 @@ function Hero() {
               </a>
               <a 
                 href="#verses" 
-                className="px-6 py-3.5 rounded-lg bg-gray-800/60 border border-gray-700 text-gray-200 font-medium hover:bg-gray-800/80 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg bg-gray-800/80 border border-gray-700 text-gray-100 font-medium hover:bg-gray-800/90 hover:border-gray-600 transition-all duration-300 flex items-center gap-2 group"
               >
                 Explore Verses
               </a>
@@ -201,7 +201,7 @@ function Verses() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Productized <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Dataverses</span>
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-300">
             Industry-tuned knowledge + retrieval so teams can converse with their entire universe of data—securely, locally, and fast.
           </p>
         </div>
@@ -324,7 +324,7 @@ function Automation() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Automate the Busywork — <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Keep Humans in Control</span>
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-300">
             Agentic workflows that plan multi-step tasks, call tools (calendar, CRM, docs), and request human approval at decision points.
           </p>
         </div>
@@ -361,7 +361,7 @@ function Automation() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-                    <p className="mt-1 text-gray-400">{feature.desc}</p>
+                    <p className="mt-1 text-gray-300">{feature.desc}</p>
                   </div>
                 </div>
                 
@@ -503,7 +503,7 @@ function CaseStudies() {
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mb-4">
             Trusted by <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Innovative Teams</span>
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-300">
             See how organizations are transforming their operations with Lumicon AI.
           </p>
         </div>

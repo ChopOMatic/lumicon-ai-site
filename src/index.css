@@ -16,7 +16,7 @@
 .bg-grid {
   background-image: theme('backgroundImage.grid-slate');
   background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  mask-image: radial-gradient(ellipse at center, rgba(255,255,255,1) 65%, rgba(255,255,255,0) 95%);
 }
 .bg-glow::before{
   content: "";
