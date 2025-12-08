@@ -142,7 +142,7 @@ function Hero() {
             </h1>
 
             <p className="text-lg text-gray-400 max-w-2xl leading-relaxed mb-8">
-              Transform your firm with a fully conversant dataverse. We load your existing data into a secure, RAG-based system that runs entirely in-house.
+              Transform your firm with a fully conversant dataverse. We load your existing data into a secure, private system that runs entirely in-house.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -376,7 +376,7 @@ function Verses() {
           <div className="relative rounded-2xl bg-gradient-to-br from-gray-900 to-black p-8 border border-white/10 shadow-2xl text-left">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent opacity-50"></div>
             <p className="text-xl text-gray-300 leading-relaxed relative z-10">
-              "Lumicon’s LegalVerse device supports ABA-aligned AI use and client data protection because it runs entirely on dedicated hardware inside the firm, it keeps all client data and AI prompts local, and never sends information to public or third‑party AI services over the internet. This design avoids the core confidentiality and privilege risks highlighted in ABA and state guidance, which focus on exposure created when lawyers upload client information to external, “self‑learning” or data‑retaining AI platforms."
+              Lumicon’s LegalVerse device supports ABA-aligned AI use and client data protection because it runs entirely on dedicated hardware inside the firm, it keeps all client data and AI prompts local, and never sends information to public or third‑party AI services over the internet. This design avoids the core confidentiality and privilege risks highlighted in ABA and state guidance, which focus on exposure created when lawyers upload client information to external, “self‑learning” or data‑retaining AI platforms.
             </p>
           </div>
         </div>
@@ -396,7 +396,7 @@ function Verses() {
 
           <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
             <DocumentTextIcon className="h-8 w-8 text-pink-400 mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">RAG-Based Intelligence</h3>
+            <h3 className="text-xl font-bold text-white mb-2">Firm-Wide Intelligence</h3>
             <p className="text-gray-400">Chat with your firm's entire history of cases, pleadings, and memos in seconds.</p>
           </div>
         </div>
@@ -695,53 +695,24 @@ function Footer() {
             </div>
           </div>
 
-          {[
-            {
-              title: 'Product',
-              links: ['Features', 'Solutions', 'Pricing', 'Changelog', 'Roadmap']
-            },
-            {
-              title: 'Resources',
-              links: ['Documentation', 'Tutorials', 'Blog', 'Community', 'Support']
-            },
-            {
-              title: 'Company',
-              links: ['About', 'Careers', 'Contact', 'Press', 'Brand']
-            }
-          ].map((column, i) => (
-            <div key={i}>
-              <h3 className="text-sm font-semibold text-white/90 mb-4">{column.title}</h3>
-              <ul className="space-y-3">
-                {column.links.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-gray-400 hover:text-white transition-colors text-sm hover:pl-1 block"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Lumicon AI. All rights reserved.
-          </p>
-          <div className="mt-4 md:mt-0 flex items-center space-x-6">
-            {['Privacy', 'Terms', 'Cookies'].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-sm text-gray-400 hover:text-white transition-colors hover:underline"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+        </div>
+      </div>
+
+      <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center">
+        <p className="text-sm text-gray-500">
+          &copy; {new Date().getFullYear()} Lumicon AI. All rights reserved.
+        </p>
+        <div className="mt-4 md:mt-0 flex items-center space-x-6">
+          {['Privacy', 'Terms', 'Cookies'].map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="text-sm text-gray-400 hover:text-white transition-colors hover:underline"
+            >
+              {item}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
@@ -814,7 +785,7 @@ function ArchDiagram() {
       <rect x="10" y="20" width="160" height="60" rx="12" fill="url(#grad)" /><text x="90" y="55" textAnchor="middle" fontSize="12" fill="white">Apps & Tools</text>
       <rect x="200" y="20" width="160" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="280" y="45" textAnchor="middle" fontSize="12" fill="#0f172a">Orchestration /</text><text x="280" y="62" textAnchor="middle" fontSize="12" fill="#0f172a">Agent Planner</text>
       <rect x="380" y="20" width="150" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="455" y="45" textAnchor="middle" fontSize="12" fill="#0f172a">Human</text><text x="455" y="62" textAnchor="middle" fontSize="12" fill="#0f172a">Approval</text>
-      <rect x="10" y="120" width="160" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="90" y="145" textAnchor="middle" fontSize="12" fill="#0f172a">Embeddings / RAG</text><text x="90" y="162" textAnchor="middle" fontSize="12" fill="#0f172a">Index</text>
+      <rect x="10" y="120" width="160" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="90" y="145" textAnchor="middle" fontSize="12" fill="#0f172a">Vector Database</text><text x="90" y="162" textAnchor="middle" fontSize="12" fill="#0f172a">Index</text>
       <rect x="200" y="120" width="160" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="280" y="145" textAnchor="middle" fontSize="12" fill="#0f172a">Connectors</text><text x="280" y="162" textAnchor="middle" fontSize="12" fill="#0f172a">(Docs, CRM, DBs)</text>
       <rect x="380" y="120" width="150" height="60" rx="12" fill="#fff" stroke="#cbd5e1" /><text x="455" y="145" textAnchor="middle" fontSize="12" fill="#0f172a">Policy & Guardrails</text><text x="455" y="162" textAnchor="middle" fontSize="12" fill="#0f172a">Audit & Logging</text>
       <rect x="10" y="200" width="520" height="30" rx="10" fill="#e2e8f0" /><text x="270" y="218" textAnchor="middle" fontSize="12" fill="#0f172a">Local/VPC • Encryption • RBAC/SSO • PII Redaction</text>
