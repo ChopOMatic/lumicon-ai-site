@@ -45,7 +45,9 @@ export default function App() {
           <Verses />
           <Automation />
           <Security />
+          <Security />
           <CTA />
+          <Newsletter />
         </main>
         <Footer />
       </div>
@@ -716,6 +718,87 @@ function Footer() {
         </div>
       </div>
     </footer>
+  )
+}
+
+function Newsletter() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'success' | 'submitting'>('idle');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus('submitting');
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+      setEmail('');
+    }, 1000);
+  };
+
+  return (
+    <section className="relative py-16 bg-black border-t border-white/5 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent opacity-50"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-medium mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            Stay Updated
+          </div>
+
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
+            Join the Lumicon community
+          </h2>
+
+          <p className="text-gray-400 mb-8">
+            Sign up to stay informed on all things Lumicon! Get the latest updates on LegalVerse and our expanding dataverse ecosystem.
+          </p>
+
+          {status === 'success' ? (
+            <div className="rounded-xl bg-green-500/10 border border-green-500/20 p-4 text-green-400 flex items-center justify-center gap-2 animate-fade-in">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Thanks for subscribing! We'll keep you in the loop.</span>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-light"
+              />
+              <button
+                type="submit"
+                disabled={status === 'submitting'}
+                className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-all duration-300 shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                {status === 'submitting' ? (
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                ) : (
+                  'Subscribe'
+                )}
+              </button>
+            </form>
+          )}
+
+          <p className="mt-4 text-xs text-gray-500">
+            No spam, ever. Unsubscribe anytime.
+          </p>
+        </div>
+      </div>
+    </section>
   )
 }
 
